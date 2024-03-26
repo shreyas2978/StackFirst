@@ -10,10 +10,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class trialInterview {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		
 		
@@ -27,9 +29,13 @@ public class trialInterview {
 		driver.get("https://www.amazon.com"); 	
 		
 		driver.manage().window().maximize();
-		//driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		//Thread.sleep(100000);
+		//driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 		
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		driver.findElement(By.xpath("//img[@alt=\"Baby\"]")).click();
+		
+		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		
 		WebElement searchBox = driver.findElement(By.xpath("//input[@id=\"twotabsearchtextbox\"]"));
 		//.sendKeys("Iphone");
@@ -83,31 +89,36 @@ public class trialInterview {
 	
 	driver.findElement(By.xpath("//a[@href=\"/gp/goldbox?ref_=nav_cs_gb\"]")).click();
 	
+
 	
-	driver.findElement(By.xpath("//span[text()='Books'])[2]")).click();
+	//driver.findElement(By.xpath("//span[text()='Books'])[2]")).click();
+	WebElement tr=driver.findElement(By.xpath("(//span[text()='Cell Phones & Accessories'])[2]"));
+	tr.click();
+
+	js.executeScript("arguments[0].scrollIntoView()", tr);	
 	
+	
+	
+	WebDriverWait wait= new WebDriverWait(driver, Duration.ofSeconds(5));
+	try {
+			WebElement ele= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[text()='Books'])[2]")));
+			
+
+			ele.click();
+	}
+	catch(Exception e){
+		
+	}
+}
 	//driver.close()
 	//span[text()='Books'])[2]
 	
 	
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	
 		
 		
 		
 		
 		
-
-		
-}
 }
